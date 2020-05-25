@@ -1,0 +1,41 @@
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head==NULL||head->next==NULL)
+            return head;
+        ListNode* temp=head,*t1,*t2,*t3;
+        while(temp!=NULL)
+        {
+            if(temp==head)
+            {
+                t2=head->next;
+                t3=t2->next;
+                t2->next=head;
+                head->next=t3;
+                head=t2;
+                t1=temp;
+                temp=temp->next;
+            }
+            else
+            {
+                
+                t2=t1->next;
+                if(t2==NULL||t2->next==NULL)
+                    return head;
+                else 
+                {
+                    t3=t2->next;
+                    t1->next=t3;
+                    t2->next=t3->next;
+                    t3->next=t2;
+                    t1=temp;
+                    temp=temp->next;
+                    
+                }
+                
+            }
+        }
+        return head;
+        
+    }
+};
