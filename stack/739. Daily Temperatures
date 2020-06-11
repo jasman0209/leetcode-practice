@@ -1,0 +1,53 @@
+/*
+**bad sol**
+
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& t) {
+        if(t.size()==0) return {};
+        vector<int> v;
+        v.push_back(0);
+        for(int i=t.size()-2;i>=0;i--)
+        {
+            int el=t[i];
+            int j=0;
+            for(j=i+1;j<t.size();j++)
+            {
+                if(t[j]>el)
+                {
+                    v.push_back(j-i);
+                    break;
+                }
+            }
+            if(j==t.size())
+            {
+                v.push_back(0);
+            }
+        }
+        reverse(v.begin(),v.end());
+        return v;
+    }
+};
+*/
+**good sol**
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& T) {
+           int n=T.size();
+        vector<int> answer(n,0);
+        if(n<=1)return answer;
+        stack<int> warmer; 
+        for(int i=n-1;i>=0;i--){
+            while(!warmer.empty()&&T[i]>=T[warmer.top()])
+                     warmer.pop();
+            if(!warmer.empty()) answer[i]=warmer.top()-i; 
+            warmer.push(i);
+            }   
+     return answer;
+  }
+};
+
+
+
+
+
